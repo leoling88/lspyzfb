@@ -451,16 +451,7 @@ export default new Router({
         title: '上传身份证明材料'
       }
     },
-    //续签6--提交身份证明类别
-    {
-      path: '/qualifyCheck4_/:idCard/:openid/:name/:cid/:getway',
-      component: function (resolve) {
-        require(['../components/visa/qualifyCheck4_.vue'], resolve)
-      },
-      meta: {
-        title: '上传身份证明材料'
-      }
-    },
+
 
     //续签7--申领条件 提交提交图片证明
     {

@@ -14,14 +14,14 @@
 
         <group title="上传居民身份证图片资料" class="group_cont borbte5" v-if="submitData.place1 === 1" >
           <div class="iconimgup1 bg1">
-            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img1"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(1,index,item.id)"  ><b></b></span>
             </div>            
           </div>
           <div class="iconimgup1 bg2">
-            <i v-show="submitData.img2.length < 1"><input @change="fileChange($event, 2)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img2.length < 1"><input @change="fileChange($event, 2)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img2"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(2,index,item.id)"><b></b></span>
@@ -31,14 +31,14 @@
 
         <group title="上传户口本图片资料" class="group_cont borbte5" v-if="submitData.place1 === 2">
           <div class="iconimgup1 bg3">
-            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img1"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(1,index,item.id)"><b></b></span>
             </div>            
           </div>
           <div class="iconimgup1 bg4">
-            <i v-show="submitData.img2.length < 1"><input @change="fileChange($event, 2)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img2.length < 1"><input @change="fileChange($event, 2)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img2"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(2,index,item.id)"><b></b></span>
@@ -48,7 +48,7 @@
 
         <group title="上传护照图片资料" class="group_cont borbte5" v-if="submitData.place1 === 3">
           <div class="iconimgup1 bg5">
-            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img1"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(1,index),item.id"><b></b></span>
@@ -58,7 +58,7 @@
 
         <group title="上传驾驶证图片资料" class="group_cont borbte5" v-if="submitData.place1 === 4">
           <div class="iconimgup1 bg6">
-            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img1"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(1,index),item.id"><b></b></span>
@@ -68,14 +68,14 @@
 
         <group title="上传临时身份证图片资料" class="group_cont borbte5" v-if="submitData.place1 === 5">
           <div class="iconimgup1 bg7">
-            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img1"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(1,index),item.id" :alt="submitData.img1.id"><b></b></span>
             </div>            
           </div>
           <div class="iconimgup1 bg8">
-            <i v-show="submitData.img2.length < 1"><input @change="fileChange($event, 2)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img2.length < 1"><input @change="fileChange($event, 2)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img2"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(2,index),item.id"><b></b></span>
@@ -85,7 +85,7 @@
 
         <group title="上传公安机关提供的身份证明文件图片资料" class="group_cont borbte5" v-if="submitData.place1 === 6">
           <div class="iconimgup1 bg9">
-            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple  accept="image/jpeg,image/jpg,image/png"/></i>
+            <i v-show="submitData.img1.length < 1"><input @change="fileChange($event, 1)" type="file"  multiple /></i>
             <div class="upload_img" v-for="(item,index) of submitData.img1"> 
               <img :src="item.src" > 
               <span class="del" @click="fileDel(1,index),item.id"><b></b></span>
@@ -261,93 +261,83 @@
         this.fileList(el.target.files, index); 
         el.target.value = '' 
       }, 
-      fileList(files, index, el){ 
+      fileList(files, index){ 
         for (let i = 0; i < files.length; i++) { 
           this.fileAdd(files[i], index); 
         } 
       }, 
-      fileAdd(file, index, el){ 
+      fileAdd(file, index){ 
         //this.submitData.size = this.submitData.size + file.size;//总大小 
         let reader = new FileReader();
         let _this = this
         reader.vue = this; 
         reader.readAsDataURL(file);
-        lrz(file, { width: 700 }).then(function(rst) {  
-          _this.upDatas.file = rst.base64
-          //判断选择的证明类型
-          if(_this.submitData.place1 == 1) {      //居民身份证
-            _this.upDatas.realType = 1
-            _this.upDatas.idCardType =1  
-          }else if(_this.submitData.place1 == 2) {   //户口簿
-            _this.upDatas.realType = 2
-            _this.upDatas.idCardType =2  
-          }else if(_this.submitData.place1 == 3) {   //护照
-            _this.upDatas.realType = 3
-            _this.upDatas.idCardType =3  
-          }else if(_this.submitData.place1 == 4) {   //驾驶证
-            _this.upDatas.realType = 4
-            _this.upDatas.idCardType =4  
-          }else if(_this.submitData.place1 == 5) {   //临时身份证
-            _this.upDatas.realType = 5
-            _this.upDatas.idCardType =5  
-          }else if(_this.submitData.place1 == 6) {   //公安机关出具的身份证明
-            _this.upDatas.realType = 6
-            _this.upDatas.idCardType = 6  
-          }
-          // console.log(rst.file.size)
-          //         _this.submitData.img1.push({ 
-          //           'src':rst.base64,
-          //           'id':_delImgId,
-          //         });
-
-          if (rst.file.size < 307200) {
-            //=======图片上传至服务器
-            api.setUpPic(_this.upDatas).then(res => {
-              const _odata = res.data.obj
-              if(res.data.success) {
-                _delImgId = _odata.fid
-                if(index === 1) {
-                  _this.submitData.img1.push({ 
-                    'src':rst.base64,
-                    'id':_delImgId,
-                  });
-                }else if (index === 2) {
-                  _this.submitData.img2.push({ 
-                    'src':rst.base64,
-                    'id':_delImgId,
-                  });                    
-                }
-                _this.$store.commit('SHOWTOAST', '上传成功!')
-                localStorage.setItem('_updata1',JSON.stringify(_this.submitData))
-                localStorage.setItem('_upImgplace1',_this.submitData.place1)
-                localStorage.setItem('_idCardType',_this.upDatas.idCardType)
-                _this.$store.commit('UPDATE_LOADING', false);
-
-              }else{
-                _this.$store.commit('UPDATE_LOADING', false);
-                _this.$store.commit('SHOWTOAST', '缺少参数，或者系统异常!')
+        let i = index
+        this.$store.commit('UPDATE_LOADING', true);
+        if(file.size < 300459){
+            reader.onload = function () { 
+              file = this.result; 
+              _this.upDatas.file = file
+              //判断选择的证明类型
+              if(_this.submitData.place1 == 1) {      //居民身份证
+                _this.upDatas.realType = 1
+                _this.upDatas.idCardType =1  
+              }else if(_this.submitData.place1 == 2) {   //户口簿
+                _this.upDatas.realType = 2
+                _this.upDatas.idCardType =2  
+              }else if(_this.submitData.place1 == 3) {   //护照
+                _this.upDatas.realType = 3
+                _this.upDatas.idCardType =3  
+              }else if(_this.submitData.place1 == 4) {   //驾驶证
+                _this.upDatas.realType = 4
+                _this.upDatas.idCardType =4  
+              }else if(_this.submitData.place1 == 5) {   //临时身份证
+                _this.upDatas.realType = 5
+                _this.upDatas.idCardType =5  
+              }else if(_this.submitData.place1 == 6) {   //公安机关出具的身份证明
+                _this.upDatas.realType = 6
+                _this.upDatas.idCardType = 6  
               }
-            }).catch(() => {
-              _this.$store.commit('UPDATE_LOADING', false);
-              _this.$store.commit('SHOWTOAST', '网络异常!')
-            })    
-           //=======图片上传至服务器 end            
+                //=======提交上传
+              api.setUpPic(_this.upDatas).then(res => {
+                const _odata = res.data.obj
+                if(res.data.success) {
+                  _delImgId = _odata.fid
+                  if(index === 1) {
+                    this.vue.submitData.img1.push({ 
+                      'src':file,
+                      'id':_delImgId,
+                    });
+                  }else if (index === 2) {
+                    this.vue.submitData.img2.push({ 
+                      'src':file,
+                      'id':_delImgId,
+                    });                    
+                  }
+                  _this.$store.commit('SHOWTOAST', '上传成功!')
+                  localStorage.setItem('_updata1',JSON.stringify(_this.submitData))
+                  localStorage.setItem('_upImgplace1',_this.submitData.place1)
+                  localStorage.setItem('_idCardType',_this.upDatas.idCardType)
+                }else{
+                  _this.$store.commit('SHOWTOAST', '缺少参数，或者系统异常!')
+                }
+                _this.$store.commit('UPDATE_LOADING', false);
+              }).catch(() => {
+                _this.$store.commit('SHOWTOAST', '网络异常!')
+              })    
+             //=======提交上传 end
+            } 
          }else{
-            _this.$store.commit('SHOWTOAST', '图片质量过大!')
+          this.$store.commit('SHOWTOAST', '图片不能大于300K!')
+          this.$store.commit('UPDATE_LOADING', false);
          }
-
-          return rst;
-        }).always(function() {
-          // 清空文件上传控件的值
-          el.target.value = null;
-        });
 
       }, 
       fileDel(indexo,index, imgId){ 
         //this.submitData.size = this.submitData.size - this.submitData.img[index].file.size;//总大小 
         this.$store.commit('UPDATE_LOADING', true);
         api.delImgData(imgId).then(res => {     //删除已上传图片
-          
+          this.$store.commit('UPDATE_LOADING', false);
           const _odata = res.data.obj
           if(res.data.success) {
             if(indexo === 1){
@@ -355,8 +345,8 @@
             } else if(indexo === 2){
               this.submitData.img2.splice(index, 1); 
             }
-            this.$store.commit('UPDATE_LOADING', false);
             this.$store.commit('SHOWTOAST', '删除成功!')
+
             localStorage.setItem('_upImgplace1',this.submitData.place1)
             localStorage.setItem('_updata1',JSON.stringify(this.submitData))
           }
@@ -364,6 +354,13 @@
         })       
 
       }, 
+      bytesToSize(bytes){ 
+        if (bytes === 0) return '0 B'; 
+        let k = 1000, // or 1024 
+          sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+          i = Math.floor(Math.log(bytes) / Math.log(k)); 
+        return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i]; 
+      },
       requirePic () {
         let _data = localStorage.getItem('_updata1')
         let _upPalce = localStorage.getItem('_upImgplace1')

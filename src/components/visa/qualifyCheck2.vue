@@ -254,7 +254,6 @@
       }         
     },
     created() {
-      localStorage.removeItem('backType')    //清除上一次签注禁返回上一页
       this.requireData()  //获取数据
 
     },

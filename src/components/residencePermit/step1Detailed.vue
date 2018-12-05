@@ -4,8 +4,8 @@
       <div style="overflow: hidden;">
         <step step="1" stepText1="基础信息" stepText2="详情信息" stepText3="信息确认"></step>
         <div class="form_cont">
-<!--           <div @click="goNext">下一步（支付宝）</div>
- -->          <!--<cell title="人员照片" ><img class="user_pic" :src="formData.userPic"></cell>-->
+          <div @click="goNext" v-if="nextBut">下一步（支付宝）</div>{{isReback}}
+          <!--<cell title="人员照片" ><img class="user_pic" :src="formData.userPic"></cell>-->
 
           <x-input v-model="formData.name" title="姓名" placeholder="请输入姓名" :show-clear="false" placeholder-align="right" :readonly="true" text-align="right"></x-input>
           <cell title="身份证" >{{formData.idNo}}</cell>
@@ -45,6 +45,7 @@
     },
     data() {
       return {
+        nextBut: true,     //显示下一步按钮
         serviceType: this.$route.query.serviceType ? this.$route.query.serviceType : 1,  // 业务类型，1,为登记，2，为居住证第一次办理， 3：为居住证续签
         isShowConfirm: false,
         isReback: false,  // 数据是否回填，主要为了解决数据回填时阻止五级联动触发事件
@@ -196,6 +197,7 @@
           color : '#2a333c', // 必须以＃开始ARGB颜色值
         });
         AlipayJSBridge.call('showOptionMenu');
+        this.nextBut = false;
       }
     },
     mounted () {

@@ -339,104 +339,99 @@
         this.fileList(el.target.files, index); 
         el.target.value = '' 
       }, 
-      fileList(files, index){ 
+      fileList(files, index, el){ 
         for (let i = 0; i < files.length; i++) { 
           this.fileAdd(files[i], index); 
         } 
       }, 
-      fileAdd(file, index){ 
+      fileAdd(file, index, el){ 
         //this.submitData.size = this.submitData.size + file.size;//总大小 
         let reader = new FileReader();
         let _this = this
         reader.vue = this; 
         reader.readAsDataURL(file);
-        let i = index
         let _place2  = this.submitData.place2
         let _imgLength = this.submitData.img1.length + this.submitData.img2.length + this.submitData.img3.length + this.submitData.img4.length
-        
+        //判断选择的证明类型
+        if(_this.submitData.place1 == 1) {      //合法稳定就业证明
+          _this.upDatas.conditionType =1  
+          if (index == 1) _this.upDatas.realType = 16    //单位营业执照
+          if (index == 2) _this.upDatas.realType = 11    //单位劳动合同
+          if (index == 3) _this.upDatas.realType = 12    //单位劳动关系证明
+          if (index == 4) _this.upDatas.realType = 13    //其它合法劳动关系证明
+        }else if(_this.submitData.place1 == 2) {   //连续就读
+          _this.upDatas.conditionType =2 
+          if (index == 1) _this.upDatas.realType = 17    //学生证
+          if (index == 2) _this.upDatas.realType = 14     // 学校连续就读证明 
+        }else if(_this.submitData.place1 == 3) {   //合法稳定住所证明
+          _this.upDatas.conditionType = 3
+          if(_place2 == 2){
+            if (index == 1) _this.upDatas.realType = 15    //房产证明
+            if (index == 2) _this.upDatas.realType = 9    //购房合同
+          }else if(_place2 == 1){
+            if (index == 2) _this.upDatas.realType = 7    //房屋租住合同
+            if (index == 3) _this.upDatas.realType = 8    //住宿证明
+          }else if(_place2 == 3){
+            if (index == 1) _this.upDatas.realType = 15    //房产证明
+            if (index == 2) _this.upDatas.realType = 8    //住宿证明
+          }else if(_place2 == 4){
+            if (index == 1) _this.upDatas.realType = 12   //单位住宿证明
+          }
+        }        
 
-        if(_imgLength <= 7) {
-          this.$store.commit('UPDATE_LOADING', true);
-          if(file.size < 300459){
-            reader.onload = function () { 
-              file = this.result; 
-              _this.upDatas.file = file
-              _this.upDatas.realType = _this.submitData.place1
-              // _this.upDatas.conditionType =  _this.submitData.place2   //图片父类型-申领条件
-              // _this.upDatas.liveType = _this.submitData.place2     //图片父类型-居住处所类型
-              //判断选择的证明类型
-              if(_this.submitData.place1 == 1) {      //合法稳定就业证明
-                _this.upDatas.conditionType =1  
-                if (index == 1) _this.upDatas.realType = 16    //单位营业执照
-                if (index == 2) _this.upDatas.realType = 11    //单位劳动合同
-                if (index == 3) _this.upDatas.realType = 12    //单位劳动关系证明
-                if (index == 4) _this.upDatas.realType = 13    //其它合法劳动关系证明
-              }else if(_this.submitData.place1 == 2) {   //连续就读
-                _this.upDatas.conditionType =2 
-                if (index == 1) _this.upDatas.realType = 17    //学生证
-                if (index == 2) _this.upDatas.realType = 14     // 学校连续就读证明 
-              }else if(_this.submitData.place1 == 3) {   //合法稳定住所证明
-                _this.upDatas.conditionType = 3
-                if(_place2 == 2){
-                  if (index == 1) _this.upDatas.realType = 15    //房产证明
-                  if (index == 2) _this.upDatas.realType = 9    //购房合同
-                }else if(_place2 == 1){
-                  if (index == 2) _this.upDatas.realType = 7    //房屋租住合同
-                  if (index == 3) _this.upDatas.realType = 8    //住宿证明
-                }else if(_place2 == 3){
-                  if (index == 1) _this.upDatas.realType = 15    //房产证明
-                  if (index == 2) _this.upDatas.realType = 8    //住宿证明
-                }else if(_place2 == 4){
-                  if (index == 1) _this.upDatas.realType = 12   //单位住宿证明
+       if(_imgLength <= 7) {     //判断上传张数
+
+        lrz(file, { width: 700 }).then(function(rst) {  
+          _this.upDatas.file = rst.base64
+          if (rst.file.size < 307200) {
+            //=======图片上传至服务器
+            api.setUpPic(_this.upDatas).then(res => {
+              const _odata = res.data.obj
+              if(res.data.success) {
+                _delImgId = _odata.fid
+                if(index === 1) {
+                  _this.submitData.img1.push({ 
+                    'src':rst.base64,
+                    'id':_delImgId,
+                  });            
+                }else if (index === 2) {
+                  _this.submitData.img2.push({ 
+                    'src':rst.base64,
+                    'id':_delImgId,
+                  });                    
+                }else if (index === 3) {
+                  _this.submitData.img3.push({ 
+                    'src':rst.base64,
+                    'id':_delImgId,
+                  });                    
+                }else if (index === 4) {
+                  _this.submitData.img4.push({ 
+                    'src':rst.base64,
+                    'id':_delImgId,
+                  });                    
                 }
+              _this.$store.commit('SHOWTOAST', '上传成功!')
+              localStorage.setItem('_updata2',JSON.stringify(_this.submitData))
+              localStorage.setItem('_upImgplace2a',_this.submitData.place1)
+              localStorage.setItem('_upImgplace2b',_this.submitData.place2)
+              localStorage.setItem('_conditionType',_this.upDatas.conditionType)
+              localStorage.setItem('_realType',_this.upDatas.realType)
+
+              }else{
+                _this.$store.commit('SHOWTOAST', '缺少参数，或者系统异常!')
               }
-              //=======提交上传
-              api.setUpPic(_this.upDatas).then(res => {
-                const _odata = res.data.obj
-                if(res.data.success) {
-                  _delImgId = _odata.fid
-                  if(index === 1) {
-                    this.vue.submitData.img1.push({ 
-                      'src':file,
-                      'id':_delImgId,
-                    });            
-                  }else if (index === 2) {
-                    this.vue.submitData.img2.push({ 
-                      'src':file,
-                      'id':_delImgId,
-                    });                    
-                  }else if (index === 3) {
-                    this.vue.submitData.img3.push({ 
-                      'src':file,
-                      'id':_delImgId,
-                    });                    
-                  }else if (index === 4) {
-                    this.vue.submitData.img4.push({ 
-                      'src':file,
-                      'id':_delImgId,
-                    });                    
-                  }
-                _this.$store.commit('SHOWTOAST', '上传成功!')
-                localStorage.setItem('_updata2',JSON.stringify(_this.submitData))
-                localStorage.setItem('_upImgplace2a',_this.submitData.place1)
-                localStorage.setItem('_upImgplace2b',_this.submitData.place2)
-                localStorage.setItem('_conditionType',_this.upDatas.conditionType)
-                localStorage.setItem('_realType',_this.upDatas.realType)
-
-                }else{
-                  _this.$store.commit('SHOWTOAST', '缺少参数，或者系统异常!')
-                }
-                _this.$store.commit('UPDATE_LOADING', false);
-              }).catch(() => {
-                _this.$store.commit('SHOWTOAST', '网络异常!')
-              })    
-             //=======提交上传 end
-            } 
+              _this.$store.commit('UPDATE_LOADING', false);
+            })    
+         //=======图片上传至服务器 end            
           }else{
-            this.$store.commit('UPDATE_LOADING', false);
-            this.$store.commit('SHOWTOAST', '图片不能大于300K!')
-            
-          }          
+            _this.$store.commit('SHOWTOAST', '图片质量过大!')
+          }
+          _this.$store.commit('UPDATE_LOADING', false);
+          return rst;
+        }).always(function() {
+          // 清空文件上传控件的值
+          el.target.value = null;
+        });         
         }else{
           this.$store.commit('UPDATE_LOADING', false);
           this.$store.commit('SHOWTOAST', '图片数据不能超过8张!')

@@ -27,36 +27,36 @@
             <span>来穗人员信息登记</span>
           </a>
           <template>
-            <!--<a v-if="registerFlag == 0 || registerFlag == 2" @click="checkRegister">-->
-              <!--<img src="../../assets/images/py_jzz.png">-->
-              <!--<span>居住证</span>-->
-              <!--<span>居住证申领/续签</span>-->
-            <!--</a>-->
-            <a href="/cnLaiSui/mobile/zhimaStart?bizCode=CERT_FACE&businesType=2&innerType=1&homeType=lspy_&type=3">
+<!--             <a v-if="registerFlag == 0 || registerFlag == 2" @click="checkRegister">
               <img src="../../assets/images/py_jzz.png">
               <span>居住证</span>
               <span>居住证申领/续签</span>
-            </a>
-<!--             <a href="javascript:;" @click="clickAler1">
+            </a> -->
+<!--             <a href="/cnLaiSui/mobile/zhimaStart?bizCode=CERT_FACE&businesType=2&innerType=1&homeType=lspy_&type=3">
+              <img src="../../assets/images/py_jzz.png">
+              <span>居住证</span>
+              <span>居住证申领/签注</span>
+            </a> -->
+             <a href="javascript:;" @click="clickAler1">
               <img src="../../assets/images/py_jzz_disabled.png">
               <span>居住证</span>
-              <span>居住证申领/续签</span>
-            </a> -->
+              <span>居住证申领/续签</span> 
+            </a>
           </template>
 
           <template>
-            <a href="/cnLaiSui/mobile/zhimaStart?bizCode=CERT_FACE&businesType=2&innerType=1&homeType=lspy_&type=2">
+<!--             <a href="/cnLaiSui/mobile/zhimaStart?bizCode=CERT_FACE&businesType=2&innerType=1&homeType=lspy_&type=2">
               <img src="../../assets/images/py_jffw.png">
               <span>积分服务</span>
               <span>积分入学/入户</span>
-            </a>
-            <!--
-            <a v-eles @click="clickAler1">    v-if="false"
+            </a> -->
+            
+            <a @click="clickAler1"> 
               <img src="../../assets/images/icon_integra_homeoff.jpg" style="width:.9rem;height:.9rem;margin:.2rem 0 0 .15rem;" >
               <span>积分服务</span>
               <span>积分入学/入户</span>
             </a>
-          -->
+          
           </template>
 
           <router-link :to="`/policyLaw?newsType=15&newName=${encodeURI('办事指南')}`">

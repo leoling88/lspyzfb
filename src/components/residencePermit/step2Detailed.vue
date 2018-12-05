@@ -4,8 +4,8 @@
         <div style="overflow: hidden;" class="step2Detailed">
           <step step="2" stepText1="基础信息" stepText2="详情信息" stepText3="信息确认"></step>
           <div class="form_cont">
-<!--             <div @click="goNext">下一步（支付宝）</div>
- -->            <cell title="户籍地址" :value="formData.hjAddressDetail"></cell>
+            <div @click="goNext" v-if="nextBut">下一步（支付宝）</div>{{isReback}}
+            <cell title="户籍地址" :value="formData.hjAddressDetail"></cell>
             <custom-selector v-model="formData.addressType" describe="户口类型" :options="adresasTypeList" :isLink="false" :disabled="true"></custom-selector>
             <custom-selector v-model="formData.polity" describe="政治面貌" :options="polityList" :isLink="false" :disabled="true"></custom-selector>
             <custom-selector v-model="formData.culture" describe="文化程度" :options="cultureList" :isLink="false" :disabled="true"></custom-selector>
@@ -69,6 +69,7 @@
       },
       data() {
           return {
+            nextBut: true,     //显示下一步按钮
             serviceType: this.$route.query.serviceType ? this.$route.query.serviceType : 1,  // 业务类型，1,为登记，2，为居住证第一次办理， 3：为居住证续签
             Confirm: {
               isShowConfirm: false,
@@ -241,6 +242,7 @@
         }
       },
       mounted(){
+        if (window.AlipayJSBridge) this.nextBut = false
         if (this.serviceType == 1) {
           if (window.AlipayJSBridge) AlipayJSBridge.call('setTitle', {title: '居住信息登记'});
         } else {

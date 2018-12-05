@@ -3,8 +3,8 @@
 
     <step step="1" stepText1="基础信息" stepText2="详情信息" stepText3="信息确认"></step>
     <div class="form_cont">
-<!--       <div @click="goNext">下一步（支付宝）</div>{{isReback}}
- -->
+      <div @click="goNext" v-if="nextBut">下一步（支付宝）</div>{{isReback}}
+
       <!--<cell title="照　片"><img class="user_pic" :src="formData.userPic"></cell>-->
       <cell title="姓　名" :value="formData.name" @click.native="mainOptChange"></cell>
       <cell title="身份证" :value="formData.idNo" @click.native="mainOptChange"></cell>
@@ -63,6 +63,7 @@
     },
     data() {
       return {
+        nextBut: true,     //显示下一步按钮
         serviceType: this.$route.query.serviceType ? this.$route.query.serviceType : 1,  // 业务类型，1,为登记，2，为居住证
         isFirst: true, // 是否是第一次选择或输入
         isShowConfirm: false,
@@ -546,6 +547,7 @@
       } else {
         if (window.AlipayJSBridge) AlipayJSBridge.call('setTitle', {title: '居住证办理'});
       }
+      if (window.AlipayJSBridge) this.nextBut = false
       this.$store.commit('UPDATE_COMGUID',this.comGuid);
       this.$store.commit('UPDATE_ALIPAY_ACOUNT',this.formData.alipayAcount);
       this.getDictionary();

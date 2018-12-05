@@ -19,6 +19,7 @@ Vue.use(utils)
 
 import ajaxError from './api/ajaxError'//配置基础工具类
 Vue.use(ajaxError)
+import lrz from 'lrz' 
 
 // import VueScroller from 'vue-scroller'
 // Vue.use(VueScroller)

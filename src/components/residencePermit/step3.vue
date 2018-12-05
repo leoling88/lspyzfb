@@ -14,11 +14,13 @@
             <h3 v-else-if="formData.djjg == 2">登记成功<span>您提交的登记信息已审核通过</span></h3>
             <h3 v-else-if="formData.djjg == 3" class="submit_failed">登记失败<span>请到街镇来穗人员服务管理中心进行处理！</span><span v-text="formData.sbyy" style="color:#888;padding-top:.15rem;"></span></h3>
             <h3 v-else-if="formData.djjg == 4" class="submit_failed">同步失败<span>请到街镇来穗人员服务管理中心进行处理！</span></h3>
+            <h3 v-else-if="formData.djjg == 5"  style="color:#000;">已登记</h3>
 			      <h3 v-else>提交成功<span>请耐心等待审核</span></h3>
           </div>
           <router-link :to="`/step1Detailed/${idCard}`" class="check_detail_btn">查看详情</router-link>
           <!-- 20180810 + by leolin -->
           <div class="check_detail_btn2" @click="butCancel" v-if="formData.djjg < 2">取消登记</div>
+          <div class="check_detail_btn2" @click="butCancel" v-if="formData.djjg === '2' || formData.djjg === '3' || formData.djjg === '5' ">重新登记</div>
           <!-- 20180810 + by leolin  endy-->
 
           <div class="kindly_reminder">
@@ -160,6 +162,12 @@
     },
     methods: {
       butCancel () {    //点击取消登记按钮
+        if(this.formData.djjg === '2' || this.formData.djjg === '3' || this.formData.djjg === '5' ){
+          this.Confirm2.confirmText = '您确认要重新登记吗？'
+        }else{
+          this.Confirm2.confirmText = '您确认要取消登记吗？'
+
+        }
         this.Confirm2.isShowConfirm = true
 
       },

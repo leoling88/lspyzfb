@@ -29,7 +29,7 @@
     directives: {TransferDom},
     data() {
       return {
-        alipayId:this.$route.query.alipayId,
+        alipayId:  this.$route.query.alipayId,
         formData:{
           name:'',   // this.$route.params.name,
           idCard:'',   //  this.$route.params.idCard,
@@ -79,11 +79,15 @@
             const _data = res.data.obj
             this.$store.commit('UPDATE_LOADING', false);
             if(res.data.success) {
-              this.formData.name = _data.realName
-              this.formData.idCard = _data.idCard
-              this.formData.openid = _data.openId
+              if(_data.aFlag){
+                this.formData.name = _data.realName
+                this.formData.idCard = _data.idCard
+                this.formData.openid = _data.openId
+                this.requireJZ()   //查询数据   
+              }else{
+                this.$store.commit('SHOWTOAST', '无法获取身份信息!')
+              }
 
-              this.requireJZ()   //查询数据
             }else{
               this.$store.commit('SHOWTOAST', '数据查询不成功!')
             }
@@ -108,7 +112,6 @@
           if(res.data.success) {
             if (_data.flag) this.formData.state = '有效'
             else  this.formData.state = '无效'
-            
             this.formData.add = _data.address
             this.formData.date = _data.limitDate
 
@@ -123,13 +126,17 @@
 
     },
     created() {
-      const _backtyep  =  localStorage.getItem('backType')
-      if(_backtyep == 'ban'){    //如果是在签注结果页返回,则跳至首页
-        this.$router.push({path:'/'});
-      }else{
-        const _alipay_id = localStorage.getItem('alipay_id')    //返回中转回居住证首页
-        if(_alipay_id > 10) this.alipayId = _alipay_id
+      if (this.alipayId){    //如果alipayId正确返回参数
         this.saolianData()
+      }else{                   //否则掉用本地存储
+        const _alipay_id = localStorage.getItem('alipay_id')  
+        if(_alipay_id.length > 20){     //如果读取本地存储存在
+          this.alipayId = _alipay_id
+          this.saolianData()          
+        }else{            //如果读取本地存储不存在返回首页
+          this.$router.push({path:'/'});
+
+        }
       }
       
       

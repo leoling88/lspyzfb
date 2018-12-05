@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <!--居住地址信息-->  
+      <!--居住地址信息--  得点人员才会出现-->  
 
       <div class="box marTB1" v-if=" formData.status == 'important' && formData.types == 'I1'">
         <group title="居住地址信息" class="group_cont borbte5 changeCell">
@@ -138,25 +138,25 @@
           this.$router.push({path:'/serverlists/' + this.formData.idCard});
       },
       requireJZZ () {    //获取居住证信息
-        if (this.formData.status == 'failure' && this.formData.types == 'F9' || this.formData.status == 'important' && this.formData.types == 'I1') {
-                api.requireJZZ(this.formData.idCard).then(res => {   
-                  this.$store.commit('UPDATE_LOADING', false);
-                  const _data = res.data.attributes
-                  if(res.data.success) {
-                    this.formData.isEms = _data.isEms
-                    this.formData2.area = _data.xzq_dict
-                    this.formData2.street = _data.jz_dict
-                    this.formData2.town = _data.jddm_dict
-                    this.formData2.add = _data.mpmc
-                    this.formData2.number = _data.dy
-                    this.formData2.polices = _data.pcs_dict
-                  }else{
-                    this.$store.commit('SHOWTOAST', '缺少参数，或者系统异常!')
-                  }
-                }).catch(() => {
-                  this.$store.commit('SHOWTOAST', '网络异常!')
-                })
-        }
+        // if (this.formData.status == 'failure' && this.formData.types == 'F9' || this.formData.status == 'important' && this.formData.types == 'I1') {
+          api.requireJZZ(this.formData.idCard).then(res => {   
+            this.$store.commit('UPDATE_LOADING', false);
+            const _data = res.data.attributes
+            if(res.data.success) {
+              this.formData.isEms = _data.isEms
+              this.formData2.area = _data.xzq_dict
+              this.formData2.street = _data.jz_dict
+              this.formData2.town = _data.jddm_dict
+              this.formData2.add = _data.mpmc
+              this.formData2.number = _data.dy
+              this.formData2.polices = _data.pcs_dict
+            }else{
+              this.$store.commit('SHOWTOAST', '缺少参数，或者系统异常!')
+            }
+          }).catch(() => {
+            this.$store.commit('SHOWTOAST', '网络异常!')
+          })
+        // }
 
       },
       requireDatas () { 
@@ -207,7 +207,7 @@
 
       },
       goHome() {   //返回首页
-        this.$router.push({path:'/jzz?alipayId='+sessionStorage.getItem('alipay_id')});
+        this.$router.push({path:'/jzz'});
       },
       judgejump() {     //判断返回、跳转
         if (this.returnPre == 0) {    //返回到首页
@@ -231,11 +231,9 @@
     },
     mounted () {
       document.addEventListener('optionMenu', this.goHome, false); // 
-      document.addEventListener('back', this.goHome, false);
     },
     destroyed () {
       document.removeEventListener('optionMenu', this.goHome, false); //
-      document.removeEventListener('back', this.goHome, false);
     }
 
 

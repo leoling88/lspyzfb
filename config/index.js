@@ -28,7 +28,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {// 配置请求代理
       '/cnLaiSui':{
-        // target: 'http://192.168.18.81:8080',
+        // target: 'http://192.168.18.250:8080',
         //target: 'http://laisui.createt.cn',
         //target: 'http://aa.qqeif.com',
        target: 'http://laisui.createt.cn:3389',

@@ -2,15 +2,15 @@
   <div class="template_container">
     <step step="2" stepText1="基础信息" stepText2="详情信息" stepText3="信息确认"></step>
     <div class="form_cont">
-<!--       <div @click="goNext">下一步（支付宝）</div>
- -->      <x-address class="hjaddress" title="户籍地区" v-model="formData.hjaddress" :list="addressData" placeholder="请选择省市区"></x-address>
+      <div @click="goNext" v-if="nextBut">下一步（支付宝）</div>{{isReback}}
+      <x-address class="hjaddress" title="户籍地区" v-model="formData.hjaddress" :list="addressData" placeholder="请选择省市区"></x-address>
       <x-input v-model="formData.hjAddressDetail" title="户籍详址" placeholder="请填写户籍详情地址" :show-clear="true" placeholder-align="right" text-align="right" :required="true" ref="hjAddressDetail" :readonly="!!formData.addressBackUp" @click.native="mainOptChange"></x-input>
       <custom-selector v-model="formData.addressType" describe="户口类型" :options="adresasTypeList"  :isFirst="isFirst"></custom-selector>
       <custom-selector v-model="formData.polity" describe="政治面貌" :options="polityList" :isFirst="isFirst"></custom-selector>
       <custom-selector v-model="formData.culture" describe="文化程度" :options="cultureList" :isFirst="isFirst"></custom-selector>
       <custom-selector v-model="formData.marry" describe="婚姻状况" :options="marryList" :isFirst="isFirst"></custom-selector>
       <div v-if="formData.marry == 2" class="is_married">
-        <x-input type="number" v-model="formData.spouseIdNo" title="配偶身份证号" placeholder="请填写配偶身份证号" :show-clear="true" placeholder-align="right" text-align="right" :max="18" :required="true" ref="spouseIdNo" :is-type="inputValid.spouseIdNo"></x-input>
+        <x-input type="text" v-model="formData.spouseIdNo" title="配偶身份证号" placeholder="请填写配偶身份证号" :show-clear="true" placeholder-align="right" text-align="right" :max="18" :required="true" ref="spouseIdNo" :is-type="inputValid.spouseIdNo" onkeyup="this.value=this.value.toUpperCase()" ></x-input>
         <x-input v-model="formData.spouseName" title="配偶姓名" placeholder="请填写配偶姓名" :show-clear="true" placeholder-align="right" text-align="right" :required="true" ref="spouseName" :is-type="inputValid.spouseName"></x-input>
       </div>
 
@@ -87,6 +87,7 @@
     directives: {TransferDom},
     data() {
       return {
+        nextBut: true,     //显示下一步按钮
         serviceType: this.$route.query.serviceType ? this.$route.query.serviceType : 1,  // 业务类型，1,为登记，2，为居住证
         isShowUnit: true, // 是否显示单位信息
         isFirst: true, // 是否是第一次选择或输入
@@ -653,6 +654,7 @@
       } else {
         if (window.AlipayJSBridge) AlipayJSBridge.call('setTitle', {title: '居住证办理'});
       }
+      if (window.AlipayJSBridge) this.nextBut = false
     },
     mounted () {
       document.addEventListener('optionMenu', this.goNext, false) // 绑定支付宝右上角点击事件

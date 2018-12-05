@@ -178,9 +178,12 @@
           if (res.data.success) {       //提交成功跳致最终提交页面
             this.$router.push({path:'/qualifyCheck6/' + this.formData.idCard + '/' + this.formData.openid + '/' + this.formData.realName + '/' + this.formData.rid + '/' + this.formData.place});
           } else {
-            this.$store.commit('SHOWTOAST', data.errorMessage);
+            this.$store.commit('SHOWTOAST', 'EMS订单发起失败！');
+            this.$store.commit('UPDATE_LOADING', false);
           }
         }).catch((res) => {
+          this.$store.commit('SHOWTOAST', '网络异常，请稍后再试');
+          this.$store.commit('UPDATE_LOADING', false);
         })
 
       },
